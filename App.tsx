@@ -1,13 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { 
   Menu, X, Bot, LayoutTemplate, Share2, 
   PieChart, Activity, Zap, CheckCircle, 
-  MessageSquare, Calendar, ChevronRight, BarChart3, Users 
+  MessageSquare, ChevronRight, BarChart3 
 } from 'lucide-react';
-import { 
-  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, 
-  AreaChart, Area 
-} from 'recharts';
 
 // --- Types ---
 type NavItem = {
@@ -15,7 +11,7 @@ type NavItem = {
   href: string;
 };
 
-// --- Mock Data for Charts ---
+// --- Mock Data for Charts (Simplified for static display) ---
 const funnelData = [
   { name: 'Leads', value: 4000 },
   { name: 'Qualificados', value: 3000 },
@@ -24,29 +20,10 @@ const funnelData = [
   { name: 'Fechados', value: 1000 },
 ];
 
-const activityData = [
-  { name: 'Seg', leads: 40, vendas: 24 },
-  { name: 'Ter', leads: 30, vendas: 13 },
-  { name: 'Qua', leads: 20, vendas: 58 },
-  { name: 'Qui', leads: 27, vendas: 39 },
-  { name: 'Sex', leads: 18, vendas: 48 },
-  { name: 'Sab', leads: 23, vendas: 38 },
-  { name: 'Dom', leads: 34, vendas: 43 },
-];
-
 // --- Components ---
 
 const Header: React.FC = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   const navItems: NavItem[] = [
     { label: 'Soluções', href: '#features' },
@@ -56,11 +33,7 @@ const Header: React.FC = () => {
   ];
 
   return (
-    <header 
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-black/80 backdrop-blur-md border-b border-white/10 py-3' : 'bg-transparent py-5'
-      }`}
-    >
+    <header className="fixed top-0 left-0 right-0 z-50 bg-black/90 border-b border-white/10 py-4 backdrop-blur-sm">
       <div className="container mx-auto px-6 flex justify-between items-center">
         <div className="flex items-center gap-2">
           <div className="w-8 h-8 rounded bg-gradient-to-br from-brand-purple to-brand-purpleDark flex items-center justify-center">
@@ -77,14 +50,14 @@ const Header: React.FC = () => {
             <a 
               key={item.label} 
               href={item.href} 
-              className="text-gray-300 hover:text-white text-sm font-medium transition-colors"
+              className="text-gray-300 hover:text-white text-sm font-medium"
             >
               {item.label}
             </a>
           ))}
           <a 
             href="#cta"
-            className="bg-brand-orange hover:bg-brand-orangeDark text-white px-5 py-2.5 rounded-lg text-sm font-bold transition-all shadow-[0_0_15px_rgba(255,165,0,0.3)] hover:shadow-[0_0_20px_rgba(255,165,0,0.5)] transform hover:-translate-y-0.5"
+            className="bg-brand-orange hover:bg-brand-orangeDark text-white px-5 py-2.5 rounded-lg text-sm font-bold shadow-[0_0_15px_rgba(255,165,0,0.3)]"
           >
             Agendar Demonstração
           </a>
@@ -128,14 +101,14 @@ const Header: React.FC = () => {
 const Hero: React.FC = () => {
   return (
     <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden">
-      {/* Abstract Background */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-brand-purple/20 rounded-full blur-[120px] -z-10 animate-pulse-slow"></div>
+      {/* Abstract Background - Static */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-brand-purple/20 rounded-full blur-[120px] -z-10"></div>
       <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-brand-orange/10 rounded-full blur-[100px] -z-10"></div>
       
       <div className="container mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         <div className="space-y-8 text-center lg:text-left z-10">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-brand-purple/30 bg-brand-purple/10 backdrop-blur-sm">
-            <span className="w-2 h-2 rounded-full bg-brand-orange animate-pulse"></span>
+            <span className="w-2 h-2 rounded-full bg-brand-orange"></span>
             <span className="text-xs font-semibold text-brand-purple tracking-wide uppercase">Nova Tecnologia V3.0</span>
           </div>
           
@@ -154,23 +127,23 @@ const Hero: React.FC = () => {
           <div className="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start">
             <a 
               href="#cta"
-              className="w-full sm:w-auto bg-brand-orange hover:bg-brand-orangeDark text-white px-8 py-4 rounded-xl font-bold transition-all shadow-[0_0_20px_rgba(255,165,0,0.4)] hover:shadow-[0_0_30px_rgba(255,165,0,0.6)] flex items-center justify-center gap-2 group"
+              className="w-full sm:w-auto bg-brand-orange hover:bg-brand-orangeDark text-white px-8 py-4 rounded-xl font-bold shadow-[0_0_20px_rgba(255,165,0,0.4)] flex items-center justify-center gap-2 group"
             >
               Quero uma Demo Grátis
-              <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              <ChevronRight className="w-5 h-5" />
             </a>
             <a 
               href="#features"
-              className="w-full sm:w-auto border border-white/20 hover:bg-white/5 text-white px-8 py-4 rounded-xl font-semibold transition-all flex items-center justify-center"
+              className="w-full sm:w-auto border border-white/20 hover:bg-white/5 text-white px-8 py-4 rounded-xl font-semibold flex items-center justify-center"
             >
               Conheça as Soluções
             </a>
           </div>
         </div>
         
-        {/* Hero Visual */}
-        <div className="relative z-10 animate-float lg:block hidden">
-            <div className="glass-panel rounded-2xl p-4 transform rotate-y-12 rotate-x-6 shadow-2xl border-t border-l border-white/20">
+        {/* Hero Visual - Static */}
+        <div className="relative z-10 lg:block hidden">
+            <div className="glass-panel rounded-2xl p-4 shadow-2xl border-t border-l border-white/20">
                 {/* Simulated Header */}
                 <div className="flex items-center justify-between mb-6 border-b border-white/10 pb-4">
                     <div className="flex items-center gap-3">
@@ -200,8 +173,8 @@ const Hero: React.FC = () => {
                 </div>
             </div>
             
-            {/* Floating Badge */}
-            <div className="absolute -bottom-10 -left-10 glass-card p-4 rounded-xl flex items-center gap-3 animate-pulse">
+            {/* Static Badge */}
+            <div className="absolute -bottom-10 -left-10 glass-card p-4 rounded-xl flex items-center gap-3">
                 <div className="bg-green-500/20 p-2 rounded-full">
                     <Bot className="text-green-500 w-6 h-6" />
                 </div>
@@ -231,7 +204,7 @@ const Features: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8">
           {features.map((feat, index) => (
             <div key={index} className="glass-card p-6 rounded-2xl text-center group">
-              <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-white/5 flex items-center justify-center text-brand-purple group-hover:bg-brand-purple group-hover:text-white transition-all duration-300">
+              <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-white/5 flex items-center justify-center text-brand-purple">
                 {feat.icon}
               </div>
               <h3 className="text-lg font-bold text-white mb-2">{feat.title}</h3>
@@ -277,7 +250,7 @@ const DemoChat: React.FC = () => {
           </a>
         </div>
 
-        {/* Right Content - Phone Mockup */}
+        {/* Right Content - Phone Mockup - Static */}
         <div className="order-1 lg:order-2 flex justify-center">
           <div className="relative w-[320px] h-[650px] bg-black border-8 border-neutral-800 rounded-[3rem] shadow-2xl overflow-hidden ring-1 ring-white/10">
             {/* Notch */}
@@ -329,7 +302,7 @@ const DemoChat: React.FC = () => {
                     
                     {/* Button Sim */}
                      <div className="flex justify-start">
-                         <button className="bg-brand-purple text-white px-4 py-2 rounded-lg text-sm w-full hover:bg-brand-purpleDark transition-colors">
+                         <button className="bg-brand-purple text-white px-4 py-2 rounded-lg text-sm w-full transition-colors">
                             Sim, agendar demonstração
                         </button>
                     </div>
@@ -478,10 +451,10 @@ const Timeline: React.FC = () => {
                 <div className="relative pl-8 border-l border-white/10 ml-6 lg:ml-0">
                     {events.map((event, index) => (
                         <div key={index} className="mb-8 relative group">
-                            {/* Dot */}
-                            <div className={`absolute -left-[38px] w-5 h-5 rounded-full ${event.color} border-4 border-black group-hover:scale-125 transition-transform`}></div>
+                            {/* Dot - Static */}
+                            <div className={`absolute -left-[38px] w-5 h-5 rounded-full ${event.color} border-4 border-black`}></div>
                             
-                            {/* Card */}
+                            {/* Card - Static */}
                             <div className="glass-card p-4 rounded-xl inline-block min-w-[250px]">
                                 <div className="flex justify-between items-start mb-1">
                                     <h4 className="font-bold text-white">{event.title}</h4>
@@ -492,7 +465,7 @@ const Timeline: React.FC = () => {
                         </div>
                     ))}
                     
-                    {/* Floating Connection Line Animation */}
+                    {/* Floating Connection Line Animation - Removed */}
                     <div className="absolute top-0 bottom-0 -left-[1px] w-[2px] bg-gradient-to-b from-brand-purple to-transparent opacity-50"></div>
                 </div>
              </div>
@@ -511,34 +484,43 @@ const Dashboard: React.FC = () => {
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                    {/* Main Chart */}
+                    {/* Main Chart - Static SVG replacement */}
                     <div className="lg:col-span-2 glass-panel p-6 rounded-2xl border border-white/5">
                         <h3 className="text-lg font-bold text-white mb-6 flex items-center gap-2">
                             <Activity className="text-brand-purple" /> Performance de Vendas (Últimos 7 dias)
                         </h3>
-                        <div className="h-[300px] w-full">
-                            <ResponsiveContainer width="100%" height="100%">
-                                <AreaChart data={activityData}>
-                                    <defs>
-                                        <linearGradient id="colorVendas" x1="0" y1="0" x2="0" y2="1">
-                                            <stop offset="5%" stopColor="#8A2BE2" stopOpacity={0.8}/>
-                                            <stop offset="95%" stopColor="#8A2BE2" stopOpacity={0}/>
-                                        </linearGradient>
-                                    </defs>
-                                    <CartesianGrid strokeDasharray="3 3" stroke="#333" vertical={false} />
-                                    <XAxis dataKey="name" stroke="#666" axisLine={false} tickLine={false} />
-                                    <YAxis stroke="#666" axisLine={false} tickLine={false} />
-                                    <Tooltip 
-                                        contentStyle={{ backgroundColor: '#111', border: '1px solid #333', borderRadius: '8px' }}
-                                        itemStyle={{ color: '#fff' }}
-                                    />
-                                    <Area type="monotone" dataKey="vendas" stroke="#8A2BE2" strokeWidth={3} fillOpacity={1} fill="url(#colorVendas)" />
-                                </AreaChart>
-                            </ResponsiveContainer>
+                        <div className="h-[300px] w-full bg-black/20 rounded-lg flex items-end justify-between px-4 pb-4 relative overflow-hidden">
+                            {/* Static Chart Representation */}
+                            <div className="absolute inset-0 flex items-center justify-center opacity-10">
+                                <div className="w-full h-px bg-white/20 absolute top-1/4"></div>
+                                <div className="w-full h-px bg-white/20 absolute top-2/4"></div>
+                                <div className="w-full h-px bg-white/20 absolute top-3/4"></div>
+                            </div>
+                            
+                            {/* Bars mimicking an area chart */}
+                            <div className="w-[10%] h-[20%] bg-brand-purple/40 rounded-t-sm"></div>
+                            <div className="w-[10%] h-[35%] bg-brand-purple/50 rounded-t-sm"></div>
+                            <div className="w-[10%] h-[30%] bg-brand-purple/40 rounded-t-sm"></div>
+                            <div className="w-[10%] h-[60%] bg-brand-purple/60 rounded-t-sm"></div>
+                            <div className="w-[10%] h-[45%] bg-brand-purple/50 rounded-t-sm"></div>
+                            <div className="w-[10%] h-[75%] bg-brand-purple/70 rounded-t-sm"></div>
+                            <div className="w-[10%] h-[55%] bg-brand-purple/60 rounded-t-sm"></div>
+                            
+                            {/* Overlay curve (SVG) */}
+                            <svg className="absolute inset-0 w-full h-full pointer-events-none" preserveAspectRatio="none">
+                                <path 
+                                    d="M0,240 L50,200 L100,220 L150,120 L200,160 L250,80 L300,140 L350,140 L400,300" 
+                                    fill="none" 
+                                    stroke="#8A2BE2" 
+                                    strokeWidth="3"
+                                    className="opacity-50"
+                                    vectorEffect="non-scaling-stroke"
+                                />
+                            </svg>
                         </div>
                     </div>
 
-                    {/* Funnel Chart */}
+                    {/* Funnel Chart - Static HTML */}
                     <div className="glass-panel p-6 rounded-2xl border border-white/5">
                         <h3 className="text-lg font-bold text-white mb-6 flex items-center gap-2">
                             <BarChart3 className="text-brand-orange" /> Funil de Conversão
@@ -553,7 +535,7 @@ const Dashboard: React.FC = () => {
                                     <div className="w-full bg-white/10 rounded-full h-2">
                                         <div 
                                             className="bg-brand-orange h-2 rounded-full" 
-                                            style={{ width: `${(item.value / 4000) * 100}%`, opacity: 1 - (index * 0.15) }}
+                                            style={{ width: `${(item.value / 4000) * 100}%` }}
                                         ></div>
                                     </div>
                                 </div>
@@ -569,7 +551,7 @@ const Dashboard: React.FC = () => {
 const CtaForm: React.FC = () => {
   return (
     <section id="cta" className="py-24 bg-black relative overflow-hidden">
-        {/* Background Gradients */}
+        {/* Background Gradients - Static */}
         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-brand-purple/10 rounded-full blur-[100px] pointer-events-none"></div>
 
         <div className="container mx-auto px-6">
@@ -613,7 +595,7 @@ const CtaForm: React.FC = () => {
                                 <label className="block text-gray-400 text-sm mb-2">Nome Completo</label>
                                 <input 
                                     type="text" 
-                                    className="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brand-purple focus:ring-1 focus:ring-brand-purple transition-all"
+                                    className="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brand-purple focus:ring-1 focus:ring-brand-purple"
                                     placeholder="Seu nome"
                                 />
                             </div>
@@ -621,7 +603,7 @@ const CtaForm: React.FC = () => {
                                 <label className="block text-gray-400 text-sm mb-2">E-mail Corporativo</label>
                                 <input 
                                     type="email" 
-                                    className="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brand-purple focus:ring-1 focus:ring-brand-purple transition-all"
+                                    className="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brand-purple focus:ring-1 focus:ring-brand-purple"
                                     placeholder="voce@empresa.com"
                                 />
                             </div>
@@ -629,11 +611,11 @@ const CtaForm: React.FC = () => {
                                 <label className="block text-gray-400 text-sm mb-2">WhatsApp</label>
                                 <input 
                                     type="tel" 
-                                    className="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brand-purple focus:ring-1 focus:ring-brand-purple transition-all"
+                                    className="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brand-purple focus:ring-1 focus:ring-brand-purple"
                                     placeholder="(00) 00000-0000"
                                 />
                             </div>
-                            <button className="w-full bg-gradient-to-r from-brand-orange to-brand-orangeDark hover:from-orange-500 hover:to-orange-600 text-white font-bold py-4 rounded-lg shadow-lg hover:shadow-orange-500/25 transition-all transform hover:-translate-y-1 mt-4">
+                            <button className="w-full bg-gradient-to-r from-brand-orange to-brand-orangeDark hover:from-orange-500 hover:to-orange-600 text-white font-bold py-4 rounded-lg shadow-lg">
                                 QUERO MINHA DEMONSTRAÇÃO
                             </button>
                             <p className="text-xs text-gray-500 text-center mt-4">

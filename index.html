@@ -25,16 +25,6 @@
                 bg: '#050505',
                 card: '#0A0A0A'
               }
-            },
-            animation: {
-              'float': 'float 6s ease-in-out infinite',
-              'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-            },
-            keyframes: {
-              float: {
-                '0%, 100%': { transform: 'translateY(0)' },
-                '50%': { transform: 'translateY(-20px)' },
-              }
             }
           }
         }
@@ -57,13 +47,10 @@
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
         border: 1px solid rgba(255, 255, 255, 0.1);
-        transition: all 0.3s ease;
       }
       .glass-card:hover {
         background: rgba(255, 255, 255, 0.08);
         border-color: rgba(138, 43, 226, 0.3);
-        transform: translateY(-5px);
-        box-shadow: 0 10px 30px -10px rgba(138, 43, 226, 0.2);
       }
       .text-glow {
         text-shadow: 0 0 20px rgba(138, 43, 226, 0.5);
@@ -89,7 +76,6 @@
     "lucide-react": "https://esm.sh/lucide-react@^0.559.0",
     "react/": "https://esm.sh/react@^19.2.1/",
     "react": "https://esm.sh/react@^19.2.1",
-    "recharts": "https://esm.sh/recharts@^3.5.1",
     "react-dom/": "https://esm.sh/react-dom@^19.2.1/"
   }
 }
